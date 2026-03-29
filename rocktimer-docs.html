@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RockTimer Documentation — Curlvation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fjord+One&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ice: #d6eaf4;
+    --ice-mid: #a8d4ec;
+    --ice-deep: #5ba3c9;
+    --sky: #e8f4fb;
+    --granite: #2c3e4a;
+    --granite-mid: #3d5263;
+    --granite-light: #5a7080;
+    --stone: #8fa5b2;
+    --amber: #e8a230;
+    --amber-light: #f2c46a;
+    --white: #f7fbfe;
+    --off-white: #eef6fb;
+    --text: #1e2f3a;
+    --text-mid: #3d5263;
+    --sidebar-width: 280px;
+    --nav-height: 64px;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --info: #2196f3;
+    --note-bg: rgba(91, 163, 201, 0.08);
+    --note-border: var(--ice-deep);
+    --warn-bg: rgba(232, 162, 48, 0.08);
+    --warn-border: var(--amber);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* TOP NAV */
+  .doc-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    height: var(--nav-height);
+    background: var(--granite);
+    border-bottom: 1px solid rgba(91, 163, 201, 0.2);
+    display: flex; align-items: center;
+    padding: 0 2rem;
+    gap: 2rem;
+  }
+
+  .doc-nav-brand {
+    display: flex; align-items: center; gap: 0.6rem;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .doc-nav-brand svg { width: 28px; height: 28px; }
+
+  .doc-nav-brand-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .doc-nav-brand-text span { color: var(--amber); }
+
+  .doc-nav-sep {
+    color: rgba(255,255,255,0.2);
+    font-size: 1.2rem;
+  }
+
+  .doc-nav-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ice-mid);
+  }
+
+  .doc-nav-right {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+
+  .doc-nav-version {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--amber);
+    background: rgba(232, 162, 48, 0.12);
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    border: 1px solid rgba(232, 162, 48, 0.3);
+  }
+
+  .doc-nav-home {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stone);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .doc-nav-home:hover { color: var(--amber); }
+
+  /* LAYOUT */
+  .doc-layout {
+    display: flex;
+    margin-top: var(--nav-height);
+    min-height: calc(100vh - var(--nav-height));
+  }
+
+  /* SIDEBAR */
+  .doc-sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    bottom: 0;
+    background: var(--off-white);
+    border-right: 1px solid rgba(44, 62, 74, 0.08);
+    overflow-y: auto;
+    padding: 2rem 0;
+  }
+
+  .sidebar-section {
+    margin-bottom: 0.25rem;
+  }
+
+  .sidebar-section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--stone);
+    padding: 0.75rem 1.5rem 0.35rem;
+    display: block;
+  }
+
+  .sidebar-links {
+    list-style: none;
+  }
+
+  .sidebar-links a {
+    display: block;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--granite-light);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+
+  .sidebar-links a:hover {
+    color: var(--granite);
+    background: rgba(44, 62, 74, 0.04);
+    border-left-color: var(--ice-deep);
+  }
+
+  .sidebar-links a.active {
+    color: var(--ice-deep);
+    font-weight: 600;
+    background: rgba(91, 163, 201, 0.08);
+    border-left-color: var(--ice-deep);
+  }
+
+  .sidebar-coming-soon {
+    display: block;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.8rem;
+    color: var(--stone);
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+  /* MAIN CONTENT */
+  .doc-main {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    max-width: 820px;
+    padding: 4rem 5rem 6rem;
+  }
+
+  /* HERO BANNER */
+  .doc-hero {
+    background: linear-gradient(135deg, var(--granite-mid) 0%, var(--granite) 100%);
+    border-radius: 6px;
+    padding: 3rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doc-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 90% 50%, rgba(91, 163, 201, 0.12) 0%, transparent 60%);
+  }
+
+  .doc-hero > * { position: relative; z-index: 2; }
+
+  .doc-hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+
+  .doc-hero-eyebrow::before {
+    content: '';
+    width: 24px; height: 2px;
+    background: var(--amber);
+    display: block;
+  }
+
+  .doc-hero-title {
+    font-family: 'Fjord One', serif;
+    font-size: 2.4rem;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+  }
+
+  .doc-hero-sub {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--stone);
+    max-width: 480px;
+    line-height: 1.65;
+  }
+
+  .doc-hero-meta {
+    margin-top: 1.5rem;
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+  }
+
+  .doc-hero-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+
+  .badge-version {
+    color: var(--amber);
+    border-color: rgba(232, 162, 48, 0.4);
+    background: rgba(232, 162, 48, 0.08);
+  }
+
+  .badge-status {
+    color: #81c784;
+    border-color: rgba(76, 175, 80, 0.4);
+    background: rgba(76, 175, 80, 0.08);
+  }
+
+  .badge-platform {
+    color: var(--ice-mid);
+    border-color: rgba(168, 212, 236, 0.4);
+    background: rgba(168, 212, 236, 0.08);
+  }
+
+  /* TYPOGRAPHY */
+  h1 {
+    font-family: 'Fjord One', serif;
+    font-size: 2rem;
+    color: var(--granite);
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(44, 62, 74, 0.1);
+  }
+
+  h1:first-child { margin-top: 0; }
+
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--granite);
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  h3 {
+    font-family: 'Barlow', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--granite-mid);
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--text-mid);
+    margin-bottom: 1rem;
+  }
+
+  ul, ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  li {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-mid);
+    margin-bottom: 0.35rem;
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--granite);
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82em;
+    background: rgba(44, 62, 74, 0.07);
+    color: var(--granite-mid);
+    padding: 0.15em 0.45em;
+    border-radius: 3px;
+    border: 1px solid rgba(44, 62, 74, 0.1);
+  }
+
+  pre {
+    background: var(--granite);
+    border-radius: 6px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 1.25rem 0 1.5rem;
+    position: relative;
+  }
+
+  pre code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.83rem;
+    background: none;
+    color: var(--ice);
+    border: none;
+    padding: 0;
+    line-height: 1.7;
+  }
+
+  .code-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--stone);
+    background: var(--granite-mid);
+    padding: 0.3rem 1rem;
+    display: inline-block;
+    border-radius: 4px 4px 0 0;
+    margin-bottom: -1px;
+    position: relative; z-index: 1;
+  }
+
+  /* CALLOUT BOXES */
+  .callout {
+    border-radius: 4px;
+    padding: 1.1rem 1.25rem;
+    margin: 1.5rem 0;
+    border-left: 3px solid;
+    display: flex; gap: 0.75rem;
+  }
+
+  .callout-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .callout p { margin-bottom: 0; font-size: 0.9rem; }
+
+  .callout-note {
+    background: var(--note-bg);
+    border-color: var(--note-border);
+  }
+
+  .callout-warn {
+    background: var(--warn-bg);
+    border-color: var(--amber);
+  }
+
+  .callout-tip {
+    background: rgba(76, 175, 80, 0.06);
+    border-color: #4caf50;
+  }
+
+  /* FEATURE TABLE */
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0 1.75rem;
+    font-size: 0.88rem;
+  }
+
+  .spec-table th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--granite-light);
+    text-align: left;
+    padding: 0.6rem 1rem;
+    background: var(--off-white);
+    border-bottom: 2px solid rgba(44, 62, 74, 0.1);
+  }
+
+  .spec-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(44, 62, 74, 0.06);
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  .spec-table tr:hover td { background: rgba(91, 163, 201, 0.04); }
+
+  .spec-table td:first-child {
+    font-weight: 500;
+    color: var(--granite);
+    white-space: nowrap;
+  }
+
+  /* STEP LIST */
+  .steps {
+    list-style: none;
+    padding: 0;
+    counter-reset: steps;
+    margin: 1.25rem 0;
+  }
+
+  .steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .steps li::before {
+    content: counter(steps);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--ice-deep);
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .steps li p { margin-bottom: 0; }
+
+  /* SECTION DIVIDER */
+  .doc-divider {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(91, 163, 201, 0.3), transparent);
+    margin: 3rem 0;
+  }
+
+  /* COMING SOON SECTION */
+  .coming-soon-section {
+    background: var(--off-white);
+    border: 1px dashed rgba(44, 62, 74, 0.2);
+    border-radius: 6px;
+    padding: 2.5rem;
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  .coming-soon-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+
+  .coming-soon-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--granite-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .coming-soon-text {
+    font-size: 0.85rem;
+    color: var(--stone);
+    margin-bottom: 0;
+  }
+
+  /* TOC */
+  .toc-box {
+    background: var(--off-white);
+    border: 1px solid rgba(44, 62, 74, 0.1);
+    border-radius: 4px;
+    padding: 1.5rem 1.75rem;
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  .toc-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--granite-light);
+    margin-bottom: 0.75rem;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 2rem;
+  }
+
+  .toc-list a {
+    font-size: 0.875rem;
+    color: var(--ice-deep);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .toc-list a:hover { color: var(--amber); }
+
+  /* ON THIS PAGE (right col) */
+  .doc-aside {
+    position: fixed;
+    top: calc(var(--nav-height) + 3rem);
+    right: 2rem;
+    width: 200px;
+  }
+
+  /* FOOTER */
+  .doc-footer {
+    background: var(--granite);
+    margin-left: var(--sidebar-width);
+    padding: 2rem 5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+    border-top: 1px solid rgba(91, 163, 201, 0.15);
+  }
+
+  .doc-footer-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ice-mid);
+  }
+
+  .doc-footer-brand span { color: var(--amber); }
+
+  .doc-footer-text {
+    font-size: 0.78rem;
+    color: var(--granite-light);
+    font-weight: 300;
+  }
+
+  .doc-footer-link {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ice-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .doc-footer-link:hover { color: var(--amber); }
+
+  /* TIMING VISUAL */
+  .timing-diagram {
+    background: var(--granite);
+    border-radius: 6px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .timing-diagram::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 90% 50%, rgba(91, 163, 201, 0.06) 0%, transparent 70%);
+  }
+
+  .timing-track {
+    display: flex; align-items: center;
+    gap: 0; margin: 0 0 1rem;
+    position: relative; z-index: 2;
+  }
+
+  .timing-zone {
+    height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+    flex: 1;
+  }
+
+  .zone-hog {
+    background: rgba(91, 163, 201, 0.15);
+    border: 1px solid rgba(91, 163, 201, 0.3);
+    color: var(--ice-mid);
+    border-radius: 4px 0 0 4px;
+  }
+
+  .zone-center {
+    background: rgba(232, 162, 48, 0.15);
+    border: 1px solid rgba(232, 162, 48, 0.3);
+    color: var(--amber);
+    border-radius: 0;
+    flex: 2;
+  }
+
+  .zone-end {
+    background: rgba(91, 163, 201, 0.08);
+    border: 1px solid rgba(91, 163, 201, 0.2);
+    color: var(--stone);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .timing-labels {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    position: relative; z-index: 2;
+  }
+
+  .timing-label {
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  .timing-label-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+
+  .timing-label-text {
+    font-size: 0.8rem;
+    color: var(--stone);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (max-width: 1024px) {
+    .doc-sidebar { display: none; }
+    .doc-main { margin-left: 0; padding: 2rem 1.5rem 4rem; max-width: 100%; }
+    .doc-footer { margin-left: 0; padding: 2rem 1.5rem; }
+    .toc-list { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="doc-nav">
+  <a href="index.html" class="doc-nav-brand">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="18" stroke="#5ba3c9" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="12" stroke="#5ba3c9" stroke-width="1"/>
+      <circle cx="20" cy="20" r="6" fill="#e8a230"/>
+      <circle cx="20" cy="20" r="2.5" fill="#2c3e4a"/>
+    </svg>
+    <span class="doc-nav-brand-text">Curl<span>vation</span></span>
+  </a>
+  <span class="doc-nav-sep">/</span>
+  <span class="doc-nav-title">RockTimer Docs</span>
+  <div class="doc-nav-right">
+    <span class="doc-nav-version">v1.0</span>
+    <a href="index.html" class="doc-nav-home">← Back to Site</a>
+  </div>
+</nav>
+
+<div class="doc-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="doc-sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-section-label">Getting Started</span>
+      <ul class="sidebar-links">
+        <li><a href="#introduction" class="active">Introduction</a></li>
+        <li><a href="#overview">Product Overview</a></li>
+        <li><a href="#whats-in-box">What's in the Box</a></li>
+        <li><a href="#quick-start">Quick Start Guide</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-label">Hardware</span>
+      <ul class="sidebar-links">
+        <li><a href="#hardware-overview">Hardware Overview</a></li>
+        <li><a href="#specifications">Specifications</a></li>
+        <li><a href="#led-indicators">LED Indicators</a></li>
+        <li><a href="#mounting">Mounting & Placement</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-label">Operation</span>
+      <ul class="sidebar-links">
+        <li><a href="#timing-basics">Timing Basics</a></li>
+        <li><a href="#reading-results">Reading Results</a></li>
+        <li><a href="#sweeping-guide">Sweeping Decision Guide</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-section-label">Coming Soon</span>
+      <span class="sidebar-coming-soon">App Integration</span>
+      <span class="sidebar-coming-soon">Advanced Settings</span>
+      <span class="sidebar-coming-soon">Calibration</span>
+      <span class="sidebar-coming-soon">Troubleshooting</span>
+      <span class="sidebar-coming-soon">Firmware Updates</span>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="doc-main">
+
+    <!-- HERO BANNER -->
+    <div class="doc-hero">
+      <div class="doc-hero-eyebrow">Curlvation Product Documentation</div>
+      <div class="doc-hero-title">RockTimer</div>
+      <p class="doc-hero-sub">The precision curling stone delivery timer that gives your team the data to sweep with confidence — shot after shot.</p>
+      <div class="doc-hero-meta">
+        <span class="doc-hero-badge badge-version">Version 1.0</span>
+        <span class="doc-hero-badge badge-status">● Live</span>
+        <span class="doc-hero-badge badge-platform">Hardware + App</span>
+      </div>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc-box">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#overview">Product Overview</a></li>
+        <li><a href="#whats-in-box">What's in the Box</a></li>
+        <li><a href="#quick-start">Quick Start Guide</a></li>
+        <li><a href="#hardware-overview">Hardware Overview</a></li>
+        <li><a href="#specifications">Specifications</a></li>
+        <li><a href="#led-indicators">LED Indicators</a></li>
+        <li><a href="#mounting">Mounting & Placement</a></li>
+        <li><a href="#timing-basics">Timing Basics</a></li>
+        <li><a href="#reading-results">Reading Results</a></li>
+        <li><a href="#sweeping-guide">Sweeping Decision Guide</a></li>
+      </ul>
+    </div>
+
+    <!-- INTRODUCTION -->
+    <h1 id="introduction">Introduction</h1>
+    <p>Welcome to the RockTimer documentation. RockTimer is Curlvation's precision stone timing system designed for competitive and recreational curling alike. By accurately timing a stone's travel from the hog line, RockTimer provides skip, vice, and sweepers the data they need to make informed decisions in real time — before the stone crosses the far hog line.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">ℹ️</div>
+      <div><p><strong>Documentation Status:</strong> This documentation is actively being developed. Sections marked as "Coming Soon" in the sidebar will be added as RockTimer's feature set is finalized and expanded.</p></div>
+    </div>
+
+    <p>This document is intended for players, coaches, and ice technicians who will be setting up, operating, or maintaining RockTimer units at their curling club or arena.</p>
+
+    <div class="doc-divider"></div>
+
+    <!-- OVERVIEW -->
+    <h1 id="overview">Product Overview</h1>
+    <p>RockTimer measures the time a curling stone takes to travel a defined distance down the sheet. This elapsed time — commonly called the "split time" — is a reliable indicator of stone velocity, which directly predicts where the stone will come to rest and whether sweeping can meaningfully alter its path.</p>
+
+    <h2>How Timing Translates to Decisions</h2>
+    <p>Every ice surface has a characteristic speed, typically expressed in seconds for a stone to travel from hog line to hog line. RockTimer captures the split time and compares it to a calibrated reference, giving your team an immediate assessment:</p>
+
+    <div class="timing-diagram">
+      <div class="timing-track">
+        <div class="timing-zone zone-hog">Hog Line<br>Start</div>
+        <div class="timing-zone zone-center">⏱ RockTimer Timing Zone</div>
+        <div class="timing-zone zone-end">Far Hog</div>
+      </div>
+      <div class="timing-labels">
+        <div class="timing-label">
+          <div class="timing-label-dot" style="background: #5ba3c9;"></div>
+          <span class="timing-label-text">Start trigger</span>
+        </div>
+        <div class="timing-label">
+          <div class="timing-label-dot" style="background: #e8a230;"></div>
+          <span class="timing-label-text">Split reading</span>
+        </div>
+        <div class="timing-label">
+          <div class="timing-label-dot" style="background: #8fa5b2;"></div>
+          <span class="timing-label-text">Sweep decision window</span>
+        </div>
+      </div>
+    </div>
+
+    <p>The result is displayed immediately on the RockTimer unit (and optionally on a companion app), giving sweepers the window they need to act before it's too late.</p>
+
+    <h2>Who Is RockTimer For?</h2>
+    <ul>
+      <li><strong>Competitive teams</strong> who want data-backed sweeping decisions to eliminate guesswork</li>
+      <li><strong>League and club players</strong> looking to improve their delivery consistency over time</li>
+      <li><strong>Coaches</strong> tracking delivery speed trends across practice sessions</li>
+      <li><strong>New curlers</strong> learning the connection between delivery weight and stone placement</li>
+    </ul>
+
+    <div class="doc-divider"></div>
+
+    <!-- WHAT'S IN THE BOX -->
+    <h1 id="whats-in-box">What's in the Box</h1>
+    <p>Each RockTimer unit ships with everything needed to get up and running on your ice sheet.</p>
+
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>RockTimer Unit</td>
+          <td>1</td>
+          <td>Main timing device</td>
+        </tr>
+        <tr>
+          <td>Mounting Bracket</td>
+          <td>1</td>
+          <td>Attaches to standard sheet boards</td>
+        </tr>
+        <tr>
+          <td>USB-C Charging Cable</td>
+          <td>1</td>
+          <td>1.5m braided cable</td>
+        </tr>
+        <tr>
+          <td>Quick Reference Card</td>
+          <td>1</td>
+          <td>LED indicator guide & button functions</td>
+        </tr>
+        <tr>
+          <td>Documentation Link Card</td>
+          <td>1</td>
+          <td>QR code linking to this documentation</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div><p>Do not expose RockTimer to standing water or direct spray from ice resurfacing equipment. The unit is moisture-resistant for normal rink conditions but is not waterproof.</p></div>
+    </div>
+
+    <div class="doc-divider"></div>
+
+    <!-- QUICK START -->
+    <h1 id="quick-start">Quick Start Guide</h1>
+    <p>Get RockTimer operational in under five minutes.</p>
+
+    <ol class="steps">
+      <li><p><strong>Charge the unit.</strong> Before first use, fully charge RockTimer via the included USB-C cable. A full charge takes approximately 90 minutes. The status LED will turn solid green when complete.</p></li>
+      <li><p><strong>Mount the unit.</strong> Attach RockTimer to the side board at the near hog line position using the included mounting bracket. See <a href="#mounting">Mounting & Placement</a> for exact positioning guidance.</p></li>
+      <li><p><strong>Power on.</strong> Press and hold the power button for 2 seconds. The display will briefly show the firmware version, then enter standby mode with the LED pulsing blue.</p></li>
+      <li><p><strong>Calibrate for ice conditions.</strong> Using the calibration mode, input the known speed of your ice sheet (if available from your ice technician). This sets the reference time RockTimer uses for sweeping recommendations. See Calibration for details. <em>(Coming soon)</em></p></li>
+      <li><p><strong>Start timing.</strong> RockTimer will automatically detect stone delivery and begin timing when a stone crosses the trigger threshold. No manual start is needed during normal operation.</p></li>
+      <li><p><strong>Read the result.</strong> The elapsed time and sweep recommendation will appear on the display within 1–2 seconds of stone detection. Sweep calls are color-coded by the LED indicator.</p></li>
+    </ol>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">✅</div>
+      <div><p><strong>Tip:</strong> During your first session, run several practice deliveries before a game to verify the calibration feels accurate for your ice conditions. Ice speed can vary between sessions.</p></div>
+    </div>
+
+    <div class="doc-divider"></div>
+
+    <!-- HARDWARE OVERVIEW -->
+    <h1 id="hardware-overview">Hardware Overview</h1>
+    <p>RockTimer is a compact, standalone device built to withstand the cold, humid environment of a curling facility. The unit features a built-in sensor array, an e-ink display for high-contrast readout under rink lighting, and a multi-color status LED visible from across the sheet.</p>
+
+    <h2>Key Components</h2>
+    <ul>
+      <li><strong>Detection Sensor</strong> — Detects stone passage at the trigger point without physical contact</li>
+      <li><strong>High-Contrast Display</strong> — Shows elapsed time and recommendations, readable in all rink lighting conditions</li>
+      <li><strong>Status LED</strong> — Large RGB LED for at-a-glance sweep call visibility</li>
+      <li><strong>Power Button</strong> — Single multifunction button for power, calibration mode entry, and display reset</li>
+      <li><strong>USB-C Port</strong> — Charging and firmware update interface</li>
+      <li><strong>Internal Battery</strong> — Provides a full day of play (approximately 8 hours) on a single charge</li>
+    </ul>
+
+    <div class="doc-divider"></div>
+
+    <!-- SPECIFICATIONS -->
+    <h1 id="specifications">Specifications</h1>
+
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Specification</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Timing Resolution</td><td>10 milliseconds (0.01s)</td></tr>
+        <tr><td>Display Type</td><td>High-contrast display</td></tr>
+        <tr><td>Display Size</td><td>TBD</td></tr>
+        <tr><td>Battery Life</td><td>~8 hours active use</td></tr>
+        <tr><td>Charge Time</td><td>~90 minutes (USB-C)</td></tr>
+        <tr><td>Operating Temperature</td><td>-10°C to +15°C (14°F to 59°F)</td></tr>
+        <tr><td>Connectivity</td><td>Bluetooth LE (app pairing)</td></tr>
+        <tr><td>Mounting</td><td>Side board bracket mount</td></tr>
+        <tr><td>Dimensions</td><td>TBD</td></tr>
+        <tr><td>Weight</td><td>TBD</td></tr>
+        <tr><td>IP Rating</td><td>TBD (moisture resistant)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">📋</div>
+      <div><p>Specifications marked <strong>TBD</strong> will be finalized as hardware production is completed. Check back for updates or contact Curlvation directly for pre-production specs.</p></div>
+    </div>
+
+    <div class="doc-divider"></div>
+
+    <!-- LED INDICATORS -->
+    <h1 id="led-indicators">LED Indicators</h1>
+    <p>The RockTimer status LED communicates device state and sweep recommendations at a glance. LED states are designed to be visible from the far end of the sheet under typical arena lighting.</p>
+
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>LED State</th>
+          <th>Color / Pattern</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Standby</td>
+          <td>Blue — slow pulse</td>
+          <td>Unit is on and waiting for stone detection</td>
+        </tr>
+        <tr>
+          <td>Timing Active</td>
+          <td>White — solid</td>
+          <td>Stone detected, timing in progress</td>
+        </tr>
+        <tr>
+          <td>Hard — Sweep!</td>
+          <td>Red — solid</td>
+          <td>Stone is light; sweep hard to add distance</td>
+        </tr>
+        <tr>
+          <td>Moderate — Sweep</td>
+          <td>Yellow — solid</td>
+          <td>Stone is slightly light; sweep to adjust</td>
+        </tr>
+        <tr>
+          <td>On Weight</td>
+          <td>Green — solid</td>
+          <td>Stone weight is ideal; skip's call</td>
+        </tr>
+        <tr>
+          <td>Heavy</td>
+          <td>Blue — solid</td>
+          <td>Stone is heavy; do not sweep</td>
+        </tr>
+        <tr>
+          <td>Charging</td>
+          <td>Orange — pulsing</td>
+          <td>Unit is charging via USB-C</td>
+        </tr>
+        <tr>
+          <td>Fully Charged</td>
+          <td>Green — solid (charging)</td>
+          <td>Battery is full</td>
+        </tr>
+        <tr>
+          <td>Low Battery</td>
+          <td>Red — slow pulse</td>
+          <td>Battery below 10%; charge soon</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="doc-divider"></div>
+
+    <!-- MOUNTING -->
+    <h1 id="mounting">Mounting & Placement</h1>
+    <p>Correct placement of RockTimer is critical for accurate detection. The unit must be positioned so its sensor has a clear line of detection across the width of the sheet at the designated trigger point.</p>
+
+    <h2>Recommended Position</h2>
+    <ul>
+      <li>Mount on the <strong>side board</strong> at the near hog line, centered vertically on the board</li>
+      <li>Sensor face should be oriented toward the centerline of the sheet</li>
+      <li>Ensure no ice debris, snow spray, or equipment obstructs the detection path</li>
+      <li>The mounting bracket allows ±15° of horizontal adjustment for alignment</li>
+    </ul>
+
+    <h2>Bracket Installation</h2>
+    <ol class="steps">
+      <li><p>Clean the side board surface at the mounting location with a dry cloth to remove ice residue.</p></li>
+      <li><p>Attach the mounting bracket to the board using the provided method for your facility's board type. (Board clip or adhesive pad — included in kit.)</p></li>
+      <li><p>Slide the RockTimer unit into the bracket until it clicks into the locked position.</p></li>
+      <li><p>Use the alignment adjustment to aim the sensor across the sheet. Verify detection by passing a stone (or similar object) slowly through the detection plane — the LED should flash white briefly.</p></li>
+    </ol>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div><p>Do not mount RockTimer directly on the ice surface or in a location where it may be struck by a delivered stone or sweeping broom. The unit should be on the side boards only.</p></div>
+    </div>
+
+    <div class="doc-divider"></div>
+
+    <!-- TIMING BASICS -->
+    <h1 id="timing-basics">Timing Basics</h1>
+    <p>Understanding what RockTimer measures helps your team use the data effectively. The core measurement is a <strong>split time</strong>: the number of seconds a stone takes to travel from the detection point (hog line) to a secondary reference marker.</p>
+
+    <h2>Split Time Reference</h2>
+    <p>Ice speed is typically described in curling as the number of seconds from hog-to-hog. A "20-second ice" means a stone thrown with typical weight takes 20 seconds to travel from near hog to far hog. Your RockTimer is calibrated to your ice's target speed so that readings above or below the target translate directly into sweep recommendations.</p>
+
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Relative Reading</th>
+          <th>What It Means</th>
+          <th>Recommended Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Time &gt; target + 1.5s</td>
+          <td>Stone is significantly light (slow)</td>
+          <td>Sweep hard immediately</td>
+        </tr>
+        <tr>
+          <td>Time = target ± 0.5s</td>
+          <td>Stone is on weight</td>
+          <td>Skip makes the call</td>
+        </tr>
+        <tr>
+          <td>Time &lt; target − 1.0s</td>
+          <td>Stone is heavy (fast)</td>
+          <td>Do not sweep; come off</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>These thresholds are configurable via the companion app and calibration mode to match your team's preferences and your ice conditions.</p>
+
+    <div class="doc-divider"></div>
+
+    <!-- READING RESULTS -->
+    <h1 id="reading-results">Reading Results</h1>
+    <p>After each delivery, RockTimer's display shows the timing result and the LED transitions to the appropriate sweep call color. Results remain on screen until the next stone is detected or the display is manually reset.</p>
+
+    <h2>Display Layout</h2>
+    <p>The display shows three pieces of information after each delivery:</p>
+    <ul>
+      <li><strong>Elapsed Time</strong> — The raw split time in seconds and tenths (e.g., <code>20.4s</code>)</li>
+      <li><strong>Delta</strong> — How far the reading deviates from the calibrated target (e.g., <code>+0.4</code> or <code>−1.2</code>)</li>
+      <li><strong>Recommendation</strong> — A plain-language call: <code>SWEEP</code>, <code>HARD</code>, <code>EASE</code>, or <code>OK</code></li>
+    </ul>
+
+    <div class="doc-divider"></div>
+
+    <!-- SWEEPING GUIDE -->
+    <h1 id="sweeping-guide">Sweeping Decision Guide</h1>
+    <p>RockTimer is a decision-support tool — the skip retains final authority on sweeping calls. This guide helps teams understand how to integrate RockTimer data into standard sweeping communication.</p>
+
+    <h2>Communication Protocol</h2>
+    <p>We recommend establishing a simple call protocol your team agrees on before the game:</p>
+
+    <ol class="steps">
+      <li><p><strong>Timer reader (vice or designated player)</strong> calls out the RockTimer result immediately after the LED changes: e.g., <em>"Hard!"</em> or <em>"Off!"</em> using the LED color as shorthand.</p></li>
+      <li><p><strong>Sweepers</strong> react to the call as they would any verbal sweep call — RockTimer's output replaces or supplements the skip's initial read.</p></li>
+      <li><p><strong>Skip confirms or overrides</strong> based on line (curl) considerations. RockTimer informs on weight, not line — the skip still reads break and calls for sweeping adjustments as needed.</p></li>
+    </ol>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div><p><strong>Best practice:</strong> In early games with RockTimer, let the skip's traditional calls take precedence and compare them with RockTimer's output to build confidence in the readings. Most teams fully transition to RockTimer-led calls within 2–3 games.</p></div>
+    </div>
+
+    <h2>What RockTimer Does Not Replace</h2>
+    <ul>
+      <li>The skip's read of curl and line — RockTimer measures weight only</li>
+      <li>Sweeper judgment on brush technique and pressure</li>
+      <li>Ice knowledge and experience — know your sheet's quirks</li>
+    </ul>
+
+    <div class="doc-divider"></div>
+
+    <!-- COMING SOON PLACEHOLDER -->
+    <div class="coming-soon-section">
+      <div class="coming-soon-icon">🚧</div>
+      <div class="coming-soon-title">More Documentation Coming Soon</div>
+      <p class="coming-soon-text">App integration, calibration procedures, advanced settings, troubleshooting, and firmware update guides are actively being developed. Check back as Curlvation's documentation grows alongside the product.</p>
+    </div>
+
+  </main>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="doc-footer">
+  <span class="doc-footer-brand">Curl<span>vation</span></span>
+  <span class="doc-footer-text">RockTimer Documentation · v1.0 · © 2025 Curlvation · Grand Rapids, MN</span>
+  <a href="index.html" class="doc-footer-link">← Back to Curlvation.com</a>
+</footer>
+
+<script>
+  // Active sidebar link on scroll
+  const sections = document.querySelectorAll('h1[id]');
+  const sidebarLinks = document.querySelectorAll('.sidebar-links a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        sidebarLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
