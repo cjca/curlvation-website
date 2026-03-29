@@ -756,9 +756,9 @@
       <div class="doc-hero-title">RockTimer</div>
       <p class="doc-hero-sub">The precision curling stone delivery timer that gives your team the data to sweep with confidence — shot after shot.</p>
       <div class="doc-hero-meta">
-        <span class="doc-hero-badge badge-version">Version 1.0</span>
-        <span class="doc-hero-badge badge-status">● Live</span>
-        <span class="doc-hero-badge badge-platform">Hardware + App</span>
+        <span class="doc-hero-badge badge-version">Version 1.0.4</span>
+        <span class="doc-hero-badge badge-status">● Beta</span>
+	<!--<span class="doc-hero-badge badge-platform">Hardware + App</span>-->
       </div>
     </div>
 
@@ -782,47 +782,51 @@
 
     <!-- INTRODUCTION -->
     <h1 id="introduction">Introduction</h1>
-    <p>Welcome to the RockTimer documentation. RockTimer is Curlvation's precision stone timing system designed for competitive and recreational curling alike. By accurately timing a stone's travel from the hog line, RockTimer provides skip, vice, and sweepers the data they need to make informed decisions in real time — before the stone crosses the far hog line.</p>
+    <p>Welcome to the RockTimer documentation. RockTimer is Curlvation's precision stone timing system designed for competitive and recreational curling alike. By accurately timing a stone's travel, RockTimer provides the skip and sweepers the data they need to make informed decisions in real time — before the stone crosses the far hog line.</p>
 
     <div class="callout callout-note">
       <div class="callout-icon">ℹ️</div>
       <div><p><strong>Documentation Status:</strong> This documentation is actively being developed. Sections marked as "Coming Soon" in the sidebar will be added as RockTimer's feature set is finalized and expanded.</p></div>
     </div>
 
-    <p>This document is intended for players, coaches, and ice technicians who will be setting up, operating, or maintaining RockTimer units at their curling club or arena.</p>
-
     <div class="doc-divider"></div>
 
     <!-- OVERVIEW -->
     <h1 id="overview">Product Overview</h1>
-    <p>RockTimer measures the time a curling stone takes to travel a defined distance down the sheet. This elapsed time — commonly called the "split time" — is a reliable indicator of stone velocity, which directly predicts where the stone will come to rest and whether sweeping can meaningfully alter its path.</p>
+    <p>RockTimer measures the time a curling stone takes to travel a defined distance on the curling sheet. This elapsed time between pre-determined points can be a reliable indicator of stone velocity, which directly predicts where the stone will come to rest. When skips and sweepers have this information, they are able to make real-time adjustments that can impact where the stone will finally come to reset.</p>
 
     <h2>How Timing Translates to Decisions</h2>
-    <p>Every ice surface has a characteristic speed, typically expressed in seconds for a stone to travel from hog line to hog line. RockTimer captures the split time and compares it to a calibrated reference, giving your team an immediate assessment:</p>
+    <p>Every ice surface has a characteristic speed that is not only different at every venue, but is different every game as well as every end. This time is typically expressed in seconds for a stone to travel from one point to another - typically Backline to Hogline and Hogline to Hogline. RockTimer captures such times giving your team an immediate assessment:</p>
 
     <div class="timing-diagram">
       <div class="timing-track">
-        <div class="timing-zone zone-hog">Hog Line<br>Start</div>
-        <div class="timing-zone zone-center">⏱ RockTimer Timing Zone</div>
-        <div class="timing-zone zone-end">Far Hog</div>
+        <div class="timing-zone zone-hog">Timing Zone Option</div>
+	<div class="timing-zone zone-center">Timing Zone Option</div>
+        <div class="timing-zone zone-end">Far House</div>
       </div>
       <div class="timing-labels">
         <div class="timing-label">
           <div class="timing-label-dot" style="background: #5ba3c9;"></div>
-          <span class="timing-label-text">Start trigger</span>
+          <span class="timing-label-text">Backline to Hogline</span>
         </div>
         <div class="timing-label">
           <div class="timing-label-dot" style="background: #e8a230;"></div>
-          <span class="timing-label-text">Split reading</span>
+          <span class="timing-label-text">Hogline to Hogline</span>
         </div>
+	<!--
         <div class="timing-label">
           <div class="timing-label-dot" style="background: #8fa5b2;"></div>
           <span class="timing-label-text">Sweep decision window</span>
         </div>
+	-->
       </div>
     </div>
 
-    <p>The result is displayed immediately on the RockTimer unit (and optionally on a companion app), giving sweepers the window they need to act before it's too late.</p>
+    <p>The result is displayed immediately on the RockTimer unit, giving team members the window they need to act before it's too late.</p>
+    <ul>
+	    <li>Backline to Hogline is typically used by sweepers to understand if they need to be sweeping immediately</li>
+	    <li>Hogline to Hogline is typically used by skips and ice crew to have a better understanding of overall ice speed and quality</li>
+    </ul>
 
     <h2>Who Is RockTimer For?</h2>
     <ul>
@@ -836,41 +840,30 @@
 
     <!-- WHAT'S IN THE BOX -->
     <h1 id="whats-in-box">What's in the Box</h1>
-    <p>Each RockTimer unit ships with everything needed to get up and running on your ice sheet.</p>
+    <p>Each RockTimer unit ships with everything needed to get up and running.</p>
 
     <table class="spec-table">
       <thead>
         <tr>
           <th>Item</th>
-          <th>Quantity</th>
           <th>Notes</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>RockTimer Unit</td>
-          <td>1</td>
           <td>Main timing device</td>
         </tr>
         <tr>
-          <td>Mounting Bracket</td>
-          <td>1</td>
-          <td>Attaches to standard sheet boards</td>
+          <td>Mounting Bracket (Optional)</td>
+          <td>Magnetic Broom Attachment</td>
         </tr>
-        <tr>
-          <td>USB-C Charging Cable</td>
-          <td>1</td>
-          <td>1.5m braided cable</td>
-        </tr>
+	<tr>
+	  <td>Retractable Lanyand (Optional)</td>
+  	  <td>Belt Loop Connections</td>
         <tr>
           <td>Quick Reference Card</td>
-          <td>1</td>
-          <td>LED indicator guide & button functions</td>
-        </tr>
-        <tr>
-          <td>Documentation Link Card</td>
-          <td>1</td>
-          <td>QR code linking to this documentation</td>
+          <td>RockTimer button functions</td>
         </tr>
       </tbody>
     </table>
@@ -887,33 +880,28 @@
     <p>Get RockTimer operational in under five minutes.</p>
 
     <ol class="steps">
-      <li><p><strong>Charge the unit.</strong> Before first use, fully charge RockTimer via the included USB-C cable. A full charge takes approximately 90 minutes. The status LED will turn solid green when complete.</p></li>
-      <li><p><strong>Mount the unit.</strong> Attach RockTimer to the side board at the near hog line position using the included mounting bracket. See <a href="#mounting">Mounting & Placement</a> for exact positioning guidance.</p></li>
-      <li><p><strong>Power on.</strong> Press and hold the power button for 2 seconds. The display will briefly show the firmware version, then enter standby mode with the LED pulsing blue.</p></li>
-      <li><p><strong>Calibrate for ice conditions.</strong> Using the calibration mode, input the known speed of your ice sheet (if available from your ice technician). This sets the reference time RockTimer uses for sweeping recommendations. See Calibration for details. <em>(Coming soon)</em></p></li>
-      <li><p><strong>Start timing.</strong> RockTimer will automatically detect stone delivery and begin timing when a stone crosses the trigger threshold. No manual start is needed during normal operation.</p></li>
-      <li><p><strong>Read the result.</strong> The elapsed time and sweep recommendation will appear on the display within 1–2 seconds of stone detection. Sweep calls are color-coded by the LED indicator.</p></li>
+      <li><p><strong>Charge the unit.</strong> Before first use, fully charge RockTimer via any USB-C cable. A full charge takes approximately 90 minutes. The unit will turn on when plugged in and a lightning bolt will appear instead of a battery icon. Real-time charge percentages will be displayed as it's charging.  The unit will charge whether the power is on or off but will typically charge faster if off when charging.</p></li>
+      <li><p><strong>Mount the unit.</strong> Attach RockTimer to your lanyard and belt loop or to your broom using the magnetic mounting bracket.</li>
+      <li><p><strong>Power on.</strong> Press the power button for 1 second. The display will briefly show RockTimer and the firmware version, then display that it is Ready.</p></li>
+      <li><p><strong>Start timing.</strong> RockTimer by default will start timing when the screen is pressed and held and stop timing when the screen is released. Future enhancements may include timing options such as tap to start and tap to stop, as well as a tap to start, tap to split options.</p></li>
+      <li><p><strong>Read the result.</strong> The elapsed time will appear on the display.</p></li>
     </ol>
-
-    <div class="callout callout-tip">
-      <div class="callout-icon">✅</div>
-      <div><p><strong>Tip:</strong> During your first session, run several practice deliveries before a game to verify the calibration feels accurate for your ice conditions. Ice speed can vary between sessions.</p></div>
-    </div>
 
     <div class="doc-divider"></div>
 
     <!-- HARDWARE OVERVIEW -->
     <h1 id="hardware-overview">Hardware Overview</h1>
-    <p>RockTimer is a compact, standalone device built to withstand the cold, humid environment of a curling facility. The unit features a built-in sensor array, an e-ink display for high-contrast readout under rink lighting, and a multi-color status LED visible from across the sheet.</p>
+    <p>RockTimer is a compact, powerful, standalone timing device built for curling. The unit features an ESP32-S3 Chip, numerous integrated sensors, WiFi/Bluetooth connections and an AMOLED display for high-contrast large numbered readout.</p>
 
     <h2>Key Components</h2>
     <ul>
-      <li><strong>Detection Sensor</strong> — Detects stone passage at the trigger point without physical contact</li>
-      <li><strong>High-Contrast Display</strong> — Shows elapsed time and recommendations, readable in all rink lighting conditions</li>
-      <li><strong>Status LED</strong> — Large RGB LED for at-a-glance sweep call visibility</li>
-      <li><strong>Power Button</strong> — Single multifunction button for power, calibration mode entry, and display reset</li>
+      <li><strong>Processor</strong> — Powerful ESP32-S3 Processor</li>
+      <li><strong>AMOLED Display</strong> — Bright, high contrast, large numbered display readable in all rink lighting conditions</li>
+      <li><strong>Power (Bottom) Button</strong> — Single button for power. Press for 1 second to turn on, hold for 2 seconds to turn off</li>
+      <li><strong>Menu (Top) Button</strong> — Single button for the menu. Press to open the menu, press again to save all settings and return</li>
       <li><strong>USB-C Port</strong> — Charging and firmware update interface</li>
-      <li><strong>Internal Battery</strong> — Provides a full day of play (approximately 8 hours) on a single charge</li>
+      <li><strong>Micro SD Card</strong> - Record all session times to an external Micro SD Card</li>
+      <li><strong>Replacable Rechargable Internal Battery</strong> — Provides a full day of play (approximately 3 games) on a single charge</li>
     </ul>
 
     <div class="doc-divider"></div>
@@ -946,96 +934,6 @@
     <div class="callout callout-note">
       <div class="callout-icon">📋</div>
       <div><p>Specifications marked <strong>TBD</strong> will be finalized as hardware production is completed. Check back for updates or contact Curlvation directly for pre-production specs.</p></div>
-    </div>
-
-    <div class="doc-divider"></div>
-
-    <!-- LED INDICATORS -->
-    <h1 id="led-indicators">LED Indicators</h1>
-    <p>The RockTimer status LED communicates device state and sweep recommendations at a glance. LED states are designed to be visible from the far end of the sheet under typical arena lighting.</p>
-
-    <table class="spec-table">
-      <thead>
-        <tr>
-          <th>LED State</th>
-          <th>Color / Pattern</th>
-          <th>Meaning</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Standby</td>
-          <td>Blue — slow pulse</td>
-          <td>Unit is on and waiting for stone detection</td>
-        </tr>
-        <tr>
-          <td>Timing Active</td>
-          <td>White — solid</td>
-          <td>Stone detected, timing in progress</td>
-        </tr>
-        <tr>
-          <td>Hard — Sweep!</td>
-          <td>Red — solid</td>
-          <td>Stone is light; sweep hard to add distance</td>
-        </tr>
-        <tr>
-          <td>Moderate — Sweep</td>
-          <td>Yellow — solid</td>
-          <td>Stone is slightly light; sweep to adjust</td>
-        </tr>
-        <tr>
-          <td>On Weight</td>
-          <td>Green — solid</td>
-          <td>Stone weight is ideal; skip's call</td>
-        </tr>
-        <tr>
-          <td>Heavy</td>
-          <td>Blue — solid</td>
-          <td>Stone is heavy; do not sweep</td>
-        </tr>
-        <tr>
-          <td>Charging</td>
-          <td>Orange — pulsing</td>
-          <td>Unit is charging via USB-C</td>
-        </tr>
-        <tr>
-          <td>Fully Charged</td>
-          <td>Green — solid (charging)</td>
-          <td>Battery is full</td>
-        </tr>
-        <tr>
-          <td>Low Battery</td>
-          <td>Red — slow pulse</td>
-          <td>Battery below 10%; charge soon</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="doc-divider"></div>
-
-    <!-- MOUNTING -->
-    <h1 id="mounting">Mounting & Placement</h1>
-    <p>Correct placement of RockTimer is critical for accurate detection. The unit must be positioned so its sensor has a clear line of detection across the width of the sheet at the designated trigger point.</p>
-
-    <h2>Recommended Position</h2>
-    <ul>
-      <li>Mount on the <strong>side board</strong> at the near hog line, centered vertically on the board</li>
-      <li>Sensor face should be oriented toward the centerline of the sheet</li>
-      <li>Ensure no ice debris, snow spray, or equipment obstructs the detection path</li>
-      <li>The mounting bracket allows ±15° of horizontal adjustment for alignment</li>
-    </ul>
-
-    <h2>Bracket Installation</h2>
-    <ol class="steps">
-      <li><p>Clean the side board surface at the mounting location with a dry cloth to remove ice residue.</p></li>
-      <li><p>Attach the mounting bracket to the board using the provided method for your facility's board type. (Board clip or adhesive pad — included in kit.)</p></li>
-      <li><p>Slide the RockTimer unit into the bracket until it clicks into the locked position.</p></li>
-      <li><p>Use the alignment adjustment to aim the sensor across the sheet. Verify detection by passing a stone (or similar object) slowly through the detection plane — the LED should flash white briefly.</p></li>
-    </ol>
-
-    <div class="callout callout-warn">
-      <div class="callout-icon">⚠️</div>
-      <div><p>Do not mount RockTimer directly on the ice surface or in a location where it may be struck by a delivered stone or sweeping broom. The unit should be on the side boards only.</p></div>
     </div>
 
     <div class="doc-divider"></div>
@@ -1125,6 +1023,15 @@
       <div class="coming-soon-title">More Documentation Coming Soon</div>
       <p class="coming-soon-text">App integration, calibration procedures, advanced settings, troubleshooting, and firmware update guides are actively being developed. Check back as Curlvation's documentation grows alongside the product.</p>
     </div>
+
+    <div class="doc-divider"></div>
+    <h1 id="sweeping-guide">FAQ</h1>
+    <ul>
+	    <li><b>My Unit Is not turning on</b> - There is a feature where if the top button is pressed when turning on RockTimer, it will go into 'bootloader' mode. Unfortunately when it is in this mode, the screen does not indicate it as of the latest beta version. To get out of bootloader mode and power on normally, you will want to hold the bottom button for 15-30 seconds up to 3 times while ensuring the top button is not pressed. The unit should power on normally.</li>
+	    <li><b>My unit seems to have locked up</b> - If your RockTimer has locked up and is not responding to input, simply press the power button for up to 30 sconds until it turns off. Power on normally after it turns off.
+		    <li><b>I have other issues</b> - Reach out. While RockTimer is in Beta, we are especially interested in feedback in order to ensure future software releases are as bug free as possible.i</li>
+		    <li><b>How much are software updates</b> - All software updates are 100% free of charge. As long as your hardware supports the features, you will receive all new functionality and features as well as bug fixes that are introduced.
+
 
   </main>
 
